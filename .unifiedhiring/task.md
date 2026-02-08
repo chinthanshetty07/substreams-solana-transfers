@@ -53,26 +53,6 @@ Where:
 
 ---
 
-## Accessing the Terminal in Code-Server
-
-You are working in a Docker environment with Code-Server as your IDE. Here's how to access the terminal:
-
-### Method 1: Keyboard Shortcut
-Press `` Ctrl + ` `` (Control + Backtick) to toggle the integrated terminal
-
-### Method 2: Menu Navigation
-1. Click on the **hamburger menu** (three horizontal lines) in the top-left corner
-2. Navigate to **Terminal** → **New Terminal**
-
-### Method 3: Command Palette
-1. Press `Ctrl + Shift + P` to open the Command Palette
-2. Type `Terminal: Create New Terminal`
-3. Press Enter
-
-Once the terminal is open, you'll see a bash prompt at the bottom of your screen where you can run commands.
-
----
-
 ## What You Need To Do
 
 ### Step 1: Install Rust
