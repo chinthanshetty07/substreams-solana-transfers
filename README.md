@@ -27,9 +27,8 @@
 - **New library version not in any tutorial.** I read the official changelogs and source.
 - **Big numbers printed as strings, and zero amounts printed as `null`.** I fixed both in `run.sh`.
 - **The script ignored my endpoint.** It was a one-line ordering bug, now fixed.
-- **Tight deadline.** I shipped a fallback zip early, then kept improving it.
 
-**Verification.** 1,564 transfers, cross-checked against Solana's own RPC.
+**Verification.** 1,564 transfers. All 6 blocks match Solana's own RPC exactly.
 
 ---
 
@@ -84,8 +83,8 @@ Set `SUBSTREAMS_ENDPOINT` to use a provider other than `mainnet.sol.streamingfas
 ## Result
 
 `output/transfers.jsonl` holds the full run: **1,564 transfers** across the six blocks
-(207 · 181 · 412 · 207 · 155 · 402). Every line matches the required format, and block
-385870151 was cross-checked against Solana RPC `getBlock`: the same 207 transfers
+(207 · 181 · 412 · 207 · 155 · 402). Every line matches the required format, and all six
+blocks were cross-checked against Solana RPC `getBlock`: every block matches exactly
 (sender, recipient, amount).
 
 Protobuf JSON omits zero values, so 0-lamport transfers (2 in this range) are printed

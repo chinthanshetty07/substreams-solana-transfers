@@ -59,12 +59,12 @@ I used Claude to explain each concept, then made a plan before writing code.
 | Protobuf JSON prints big numbers as strings (`"325253"`) | Reformatted in `run.sh` with `jq`, so `amount` is a plain integer with no rounding. |
 | The script ignored my Pinax endpoint | It set the endpoint before loading `.env`. I moved one line. |
 | Two transfers printed `"amount": null` | Protobuf leaves out zero values. I defaulted a missing amount to `0`. |
-| Tight deadline | Packaged a working submission early as a fallback, then kept improving it. |
 
 ## 6. How I know it's correct
 
 - 1,564 transfers across the 6 blocks, and every line matches the required format.
 - I cross-checked against Solana's own RPC (`getBlock`). I counted every successful System Program transfer myself and compared sender, receiver and amount for each.
+- **All 6 blocks match exactly:** 207, 181, 412, 207, 155 and 402 transfers.
 - Unit tests cover decoding: a valid transfer, other instructions, and broken data.
 
 ## What I took away
