@@ -1,5 +1,38 @@
 # Solana Transfers Substreams
 
+## My Thinking Process
+
+> Full version: [MY_THINKING_PROCESS.md](MY_THINKING_PROCESS.md)
+
+**Understanding the problem.** I'd never used blockchain, Rust or Substreams. I boiled the task down to: *for 6 Solana blocks, find every SOL transfer and print sender, receiver and amount.* The sample amount pointed to native SOL in lamports.
+
+**Concepts I learned.**
+- A block holds transactions, and a transaction holds instructions.
+- SOL moves through the built-in System Program.
+- Amounts are in lamports. Addresses are base58.
+- A transfer can hide inside another program's call (an inner instruction).
+- Substreams runs my Rust code (compiled to WebAssembly) on each block. It is packaged as an `.spkg`.
+
+**Subproblems.** Install the tools → get an API key → set up the project → decode transfers → match the exact format → run the 6 blocks → verify. I used Claude to learn each piece and plan before coding.
+
+**Decisions.**
+- Native SOL `Transfer` instructions only.
+- Successful transactions only.
+- Inner instructions included, 0-lamport transfers kept.
+- Latest official libraries.
+- Exact formatting done in `run.sh`.
+
+**Problems and fixes.**
+- **API keys rejected everywhere.** I tested each provider and key prefix, which proved the keys were bad. The Graph Market blocks sign-ups in my region, so I switched to Pinax.
+- **New library version not in any tutorial.** I read the official changelogs and source.
+- **Big numbers printed as strings, and zero amounts printed as `null`.** I fixed both in `run.sh`.
+- **The script ignored my endpoint.** It was a one-line ordering bug, now fixed.
+- **Tight deadline.** I shipped a fallback zip early, then kept improving it.
+
+**Verification.** 1,564 transfers, cross-checked against Solana's own RPC.
+
+---
+
 A Rust Substreams module that extracts native SOL transfers from Solana blocks
 **385870151 – 385870156** and prints one JSON object per transfer:
 
