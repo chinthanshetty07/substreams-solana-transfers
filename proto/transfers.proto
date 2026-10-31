@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package sol.transfers.v1;
+
+// All native SOL transfers found in a single block.
+message Transfers {
+  repeated Transfer transfers = 1;
+}
+
+// A System Program `Transfer` instruction.
+message Transfer {
+  string from = 1;   // sender, base58
+  string to = 2;     // recipient, base58
+  uint64 amount = 3; // lamports
+}

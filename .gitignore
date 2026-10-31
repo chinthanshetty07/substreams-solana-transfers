@@ -1,0 +1,16 @@
+# Rust build output
+/target
+
+# Substreams build output
+*.spkg
+/replay.log
+
+# Secrets
+.env
+.substreams.env
+
+# OS
+.DS_Store
+
+# Substreams protogen cache
+src/pb/.last_generated_hash

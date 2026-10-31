@@ -1,0 +1,21 @@
+[package]
+name = "solana-transfers"
+version = "0.1.0"
+edition = "2021"
+description = "Substreams module extracting native SOL transfers from Solana blocks"
+publish = false
+
+[lib]
+name = "solana_transfers"
+crate-type = ["cdylib"]
+
+[dependencies]
+buffa = "0.9"
+substreams = "0.8"
+substreams-solana = "0.16"
+
+[profile.release]
+lto = true
+opt-level = "s"
+strip = "debuginfo"
+panic = "abort"
