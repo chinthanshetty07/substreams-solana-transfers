@@ -7,7 +7,6 @@ cd "$(dirname "$0")/.."
 
 START_BLOCK=385870151
 STOP_BLOCK=+6 # exclusive: 385870151..385870156
-ENDPOINT="${SUBSTREAMS_ENDPOINT:-mainnet.sol.streamingfast.io:443}"
 
 # Credentials: an API key in .env, or a JWT written to .substreams.env by `substreams auth`.
 for env_file in .env .substreams.env; do
@@ -22,8 +21,10 @@ elif [[ -z "${SUBSTREAMS_API_KEY:-}" ]]; then
   exit 1
 fi
 
+ENDPOINT="${SUBSTREAMS_ENDPOINT:-mainnet.sol.streamingfast.io:443}"
+
 substreams build >&2
 
 substreams run solana-transfers-v0.1.0.spkg map_transfers \
   -e "$ENDPOINT" -s "$START_BLOCK" -t "$STOP_BLOCK" -o jsonl \
-  | jq -r '.["@data"].transfers[]? | "{\"from\": \"\(.from)\", \"to\": \"\(.to)\", \"amount\": \(.amount)}"'
+  | jq -r '.["@data"].transfers[]? | "{\"from\": \"\(.from)\", \"to\": \"\(.to)\", \"amount\": \(.amount // 0)}"'
