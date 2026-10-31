@@ -48,6 +48,16 @@ cargo test                         # unit tests for instruction decoding
 
 Set `SUBSTREAMS_ENDPOINT` to use a provider other than `mainnet.sol.streamingfast.io:443`.
 
+## Status
+
+| Success criterion (task.md) | Status |
+|---|---|
+| Valid SPKG builds without errors | ✅ `solana-transfers-v0.1.0.spkg` included; `substreams build`, `cargo test`, `clippy -D warnings` all pass |
+| Run against blocks 385870151–385870156 | ⚠️ Blocked on authentication: The Graph Market sign-up is not available in my region, and the keys I obtained were rejected by StreamingFast and Pinax. `run.sh` executes end to end up to the auth step |
+| Output in the required format | ✅ `run.sh` formatter produces the exact line format from task.md (verified on sample module output) |
+
+With a valid key, `./.unifiedhiring/run.sh` produces the final output with no code changes.
+
 ## Layout
 
 ```
